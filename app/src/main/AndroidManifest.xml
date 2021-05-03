@@ -9,6 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.NoActionBar">
+<<<<<<< HEAD
+=======
+        <activity android:name=".Sexta_activity"></activity>
+        <activity android:name=".quinta_activity" />
+        <activity android:name=".cuarta_activity" />
+>>>>>>> 3cbcd39a204f0ca29b4db2df3215795e8c95e3e5
         <activity android:name=".TercerActivity" />
         <activity android:name=".SegundoActivity" />
         <activity android:name=".MainActivity">
