@@ -15,8 +15,9 @@ public class SegundoActivity extends AppCompatActivity {
     }
 
     //metodo para el btn de volver
-    public void Volver(View view){
-        Intent volver = new Intent(this, MainActivity.class);
-        startActivity(volver);
+
+    public void siguiente(View view){
+        Intent siguiente = new Intent(this, TercerActivity.class);
+        startActivity(siguiente);
     }
 }

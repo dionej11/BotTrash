@@ -8,7 +8,7 @@
     tools:context=".cuarta_activity">
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/btnFinalizar"
         android:layout_width="263dp"
         android:layout_height="52dp"
         android:layout_marginBottom="68dp"
@@ -20,15 +20,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3"
+        app:layout_constraintTop_toBottomOf="@+id/lugar"
         app:layout_constraintVertical_bias="0.195" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnConectarBlue"
         android:layout_width="263dp"
         android:layout_height="52dp"
         android:layout_marginBottom="224dp"
         android:background="@drawable/button_rounded"
+        android:onClick="Siguiente"
         android:text="Conectar con Bluetooth"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
@@ -36,11 +37,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3"
+        app:layout_constraintTop_toBottomOf="@+id/lugar"
         app:layout_constraintVertical_bias="0.195" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btnIniciar"
         android:layout_width="263dp"
         android:layout_height="52dp"
         android:layout_marginBottom="148dp"
@@ -52,11 +53,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3"
+        app:layout_constraintTop_toBottomOf="@+id/lugar"
         app:layout_constraintVertical_bias="0.195" />
 
     <ImageButton
-        android:id="@+id/imageButton6"
+        android:id="@+id/btnAtras"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="268dp"
@@ -83,7 +84,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/tv_cambiante"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -94,7 +95,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/btnAdelante"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="124dp"
@@ -106,7 +107,7 @@
         app:srcCompat="@mipmap/controles" />
 
     <ImageButton
-        android:id="@+id/imageButton3"
+        android:id="@+id/btnIzquierda"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
@@ -119,7 +120,7 @@
         app:srcCompat="@mipmap/controles" />
 
     <ImageButton
-        android:id="@+id/imageButton4"
+        android:id="@+id/btnDerecha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="200dp"
@@ -132,22 +133,14 @@
         app:srcCompat="@mipmap/controles" />
 
     <ImageButton
-        android:id="@+id/imageButton7"
+        android:id="@+id/btnDetener"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#00FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton6"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton4"
-        app:layout_constraintStart_toEndOf="@+id/imageButton3"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton2"
+        app:layout_constraintBottom_toTopOf="@+id/btnAtras"
+        app:layout_constraintEnd_toStartOf="@+id/btnDerecha"
+        app:layout_constraintStart_toEndOf="@+id/btnIzquierda"
+        app:layout_constraintTop_toBottomOf="@+id/btnAdelante"
         app:srcCompat="@mipmap/buttoncentro" />
-
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="105dp"
-        android:layout_height="118dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/elipseControles" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
