@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">BotTrash</string>
+    <string name="txt_inicio">Bot Trash</string>
+    <string name="descri">Circulos</string>
+    <string name="add_lug">Aún no hay lugares añadidos</string>
+    <string name="txt_lug">Lugar</string>
+    <string name="barra">|</string>
+    <string name="in_txt">Nombre del lugar</string>
+    <string name="next">Siguiente</string>
+    <string name="cambia">Nombre cambiante</string>
+    <string name="fin">Finalizar recorrido</string>
+    <string name="conect">Conectar Bluetooth</string>
+    <string name="inicio">Iniciar recorrido</string>
+    <string name="limpia">Limpiando...</string>
+    <string name="lugares">Lugares añadidos</string>
 </resources>
