@@ -39,12 +39,12 @@
         app:layout_constraintVertical_bias="0.195" />
 
     <Button
-        android:id="@+id/btnIniciar"
+        android:id="@+id/btnDesco"
         android:layout_width="265dp"
         android:layout_height="44dp"
         android:layout_marginBottom="112dp"
         android:background="@drawable/button_rounded"
-        android:text="@string/inicio"
+        android:text="@string/desco"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
