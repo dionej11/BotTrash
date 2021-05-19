@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -34,9 +36,13 @@ public class cuarta_activity extends AppCompatActivity {
     public static String address = null;
     private static final UUID BTMODULEUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
     public boolean activar;
-    Handler bluetoothIn;
+    //Handler bluetoothIn;
     final int handlerState = 0;
     private ConnectedThread MyConexionBT;
+
+    private static final String TAG = "MY_APP_DEBUG_TAG";
+
+    public static final int MSG_LEER = 11;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,9 +79,14 @@ public class cuarta_activity extends AppCompatActivity {
         btnConexion.setOnClickListener(new View.OnClickListener() {//CONECTAR
             @Override
             public void onClick(View v) {
-                activar = true;
-                onResume();
-                Toast.makeText(getBaseContext(), "Conectados", Toast.LENGTH_LONG).show();
+                try {
+                    activar = true;
+                    onResume();
+                    Toast.makeText(getBaseContext(), "Conectados", Toast.LENGTH_LONG).show();
+                }catch (Exception e){
+                    Toast.makeText(getBaseContext(), "error", Toast.LENGTH_LONG).show();
+                }
+
             }
         });
         btnDesconexion.setOnClickListener(new View.OnClickListener() {//DESCONECTAR
@@ -125,8 +136,6 @@ public class cuarta_activity extends AppCompatActivity {
                 MyConexionBT.write("f");
             }
         });
-
-
     } //Fin del onCreate
 
     public void Siguiente(View view){
@@ -173,8 +182,16 @@ public class cuarta_activity extends AppCompatActivity {
             MyConexionBT.start();
         }
     }
+    private interface MessageConstants {
+        public static final int MESSAGE_READ = 0;
+        public static final int MESSAGE_WRITE = 1;
+        public static final int MESSAGE_TOAST = 2;
+
+        // ... (Add other message types here as needed.)
+    }
 
     private class ConnectedThread extends Thread {
+
         private final InputStream mmInStream;
         private final OutputStream mmOutStream;
 
@@ -182,28 +199,36 @@ public class cuarta_activity extends AppCompatActivity {
 
             InputStream tmpIn = null;
             OutputStream tmpOut = null;
+
             try {
+                tmpIn = socket.getInputStream();
+            } catch (IOException e) {
+                Log.e(TAG, "Error occurred when creating input stream", e);
+            }
+            try {
+                tmpOut = socket.getOutputStream();
+            } catch (IOException e) {
+                Log.e(TAG, "Error occurred when creating output stream", e);
+            }
+
+            /*try {
                 tmpIn = socket.getInputStream();
                 tmpOut = socket.getOutputStream();
             } catch (IOException e) {
 
-            }
+            }*/
             mmInStream = tmpIn;
             mmOutStream = tmpOut;
         }
 
         public void run() {
-            byte[] buffer = new byte[256];
-            int bytes;
-
+            byte[] byte_in = new byte[1];
             // Se mantiene en modo escucha para determinar el ingreso de datos
             while (true) {
                 try {
-
-                    bytes = mmInStream.read(buffer);
-                    String readMessage = new String(buffer, 0, bytes);
-                    // Envia los datos obtenidos hacia el evento via handler
-                    bluetoothIn.obtainMessage(handlerState, bytes, -1, readMessage).sendToTarget();
+                    mmInStream.read(byte_in);
+                    char ch = (char) byte_in[0];
+                    bluetoothIn.obtainMessage(handlerState, ch).sendToTarget();
                 } catch (IOException e) {
                     break;
                 }
