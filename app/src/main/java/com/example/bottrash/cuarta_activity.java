@@ -33,8 +33,8 @@ public class cuarta_activity extends AppCompatActivity {
     private BluetoothSocket btSocket = null;
     public static String address = null;
     private static final UUID BTMODULEUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
-    public boolean activar;
-    Handler bluetoothIn;
+    public boolean activar=true;
+    //Handler bluetoothIn;
     final int handlerState = 0;
     private ConnectedThread MyConexionBT;
 
@@ -74,7 +74,7 @@ public class cuarta_activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 activar = true;
-                onResume();
+                //onResume();
                 Toast.makeText(getBaseContext(), "Conectados", Toast.LENGTH_LONG).show();
             }
         });
@@ -186,7 +186,7 @@ public class cuarta_activity extends AppCompatActivity {
                 tmpIn = socket.getInputStream();
                 tmpOut = socket.getOutputStream();
             } catch (IOException e) {
-
+                e.printStackTrace();
             }
             mmInStream = tmpIn;
             mmOutStream = tmpOut;
@@ -202,8 +202,11 @@ public class cuarta_activity extends AppCompatActivity {
 
                     bytes = mmInStream.read(buffer);
                     String readMessage = new String(buffer, 0, bytes);
+                    System.out.println("la coordenada es "+readMessage);
                     // Envia los datos obtenidos hacia el evento via handler
-                    bluetoothIn.obtainMessage(handlerState, bytes, -1, readMessage).sendToTarget();
+                   //bluetoothIn.obtainMessage(handlerState, bytes, -1, readMessage).sendToTarget();
+
+                   //call firebase
                 } catch (IOException e) {
                     break;
                 }
