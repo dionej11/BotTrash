@@ -35,7 +35,7 @@ public class cuarta_activity extends AppCompatActivity {
     private BluetoothSocket btSocket = null;
     public static String address = null;
     private static final UUID BTMODULEUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
-    public boolean activar;
+    public boolean activar=true;
     //Handler bluetoothIn;
     final int handlerState = 0;
     private ConnectedThread MyConexionBT;
@@ -79,14 +79,9 @@ public class cuarta_activity extends AppCompatActivity {
         btnConexion.setOnClickListener(new View.OnClickListener() {//CONECTAR
             @Override
             public void onClick(View v) {
-                try {
-                    activar = true;
-                    onResume();
-                    Toast.makeText(getBaseContext(), "Conectados", Toast.LENGTH_LONG).show();
-                }catch (Exception e){
-                    Toast.makeText(getBaseContext(), "error", Toast.LENGTH_LONG).show();
-                }
-
+                activar = true;
+                //onResume();
+                Toast.makeText(getBaseContext(), "Conectados", Toast.LENGTH_LONG).show();
             }
         });
         btnDesconexion.setOnClickListener(new View.OnClickListener() {//DESCONECTAR
@@ -199,36 +194,31 @@ public class cuarta_activity extends AppCompatActivity {
 
             InputStream tmpIn = null;
             OutputStream tmpOut = null;
-
             try {
-                tmpIn = socket.getInputStream();
-            } catch (IOException e) {
-                Log.e(TAG, "Error occurred when creating input stream", e);
-            }
-            try {
-                tmpOut = socket.getOutputStream();
-            } catch (IOException e) {
-                Log.e(TAG, "Error occurred when creating output stream", e);
-            }
-
-            /*try {
                 tmpIn = socket.getInputStream();
                 tmpOut = socket.getOutputStream();
             } catch (IOException e) {
 
-            }*/
+            }
             mmInStream = tmpIn;
             mmOutStream = tmpOut;
         }
 
         public void run() {
-            byte[] byte_in = new byte[1];
+            byte[] buffer = new byte[256];
+            int bytes;
+
             // Se mantiene en modo escucha para determinar el ingreso de datos
             while (true) {
                 try {
-                    mmInStream.read(byte_in);
-                    char ch = (char) byte_in[0];
-                    bluetoothIn.obtainMessage(handlerState, ch).sendToTarget();
+
+                    bytes = mmInStream.read(buffer);
+                    String readMessage = new String(buffer, 0, bytes);
+                    System.out.println("la coordenada es "+readMessage);
+                    // Envia los datos obtenidos hacia el evento via handler
+                   //bluetoothIn.obtainMessage(handlerState, bytes, -1, readMessage).sendToTarget();
+
+                   //call firebase
                 } catch (IOException e) {
                     break;
                 }
