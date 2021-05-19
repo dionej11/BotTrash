@@ -4,8 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -15,12 +13,16 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.os.Handler;
-import android.view.View;
 import android.widget.Toast;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
@@ -36,18 +38,30 @@ public class cuarta_activity extends AppCompatActivity {
     public static String address = null;
     private static final UUID BTMODULEUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
     public boolean activar=true;
-    //Handler bluetoothIn;
+    Handler bluetoothIn;
     final int handlerState = 0;
     private ConnectedThread MyConexionBT;
 
-    private static final String TAG = "MY_APP_DEBUG_TAG";
-
-    public static final int MSG_LEER = 11;
+    DatabaseReference mRootReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cuarta_activity);
+
+        mRootReference = FirebaseDatabase.getInstance().getReference();
+
+        bluetoothIn = new Handler() {
+            public void handleMessage(android.os.Message msg) {
+                if (msg.what == handlerState) {
+                    String coordenada = (String) msg.obj;
+                    String lugar = (String)tv_cambia.getText();
+                    tv_cambia.setText(lugar+"-"+coordenada);
+
+                    subirDatos(lugar,coordenada);
+                }
+            }
+        };
 
         btAdapter = BluetoothAdapter.getDefaultAdapter();
         VerificarEstadoBT();
@@ -137,6 +151,14 @@ public class cuarta_activity extends AppCompatActivity {
         Intent Siguiente = new Intent(this, quinta_activity.class);
         startActivity(Siguiente);
     }
+    private void subirDatos(String lugar, String coordenada){
+
+        Map<String, Object> datosCoor = new HashMap<>();
+        datosCoor.put("coordenada", coordenada);
+
+        mRootReference.child("coordenadas").child(lugar).setValue(datosCoor);
+
+    }
 
     private BluetoothSocket createBluetoothSocket (BluetoothDevice device) throws IOException{
         return device.createRfcommSocketToServiceRecord(BTMODULEUUID);
@@ -177,13 +199,6 @@ public class cuarta_activity extends AppCompatActivity {
             MyConexionBT.start();
         }
     }
-    private interface MessageConstants {
-        public static final int MESSAGE_READ = 0;
-        public static final int MESSAGE_WRITE = 1;
-        public static final int MESSAGE_TOAST = 2;
-
-        // ... (Add other message types here as needed.)
-    }
 
     private class ConnectedThread extends Thread {
 
@@ -216,7 +231,7 @@ public class cuarta_activity extends AppCompatActivity {
                     String readMessage = new String(buffer, 0, bytes);
                     System.out.println("la coordenada es "+readMessage);
                     // Envia los datos obtenidos hacia el evento via handler
-                   //bluetoothIn.obtainMessage(handlerState, bytes, -1, readMessage).sendToTarget();
+                    bluetoothIn.obtainMessage(handlerState, bytes, -1, readMessage).sendToTarget();
 
                    //call firebase
                 } catch (IOException e) {
