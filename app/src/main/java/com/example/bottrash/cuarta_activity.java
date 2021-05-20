@@ -15,14 +15,9 @@ import android.bluetooth.BluetoothSocket;
 import android.os.Handler;
 import android.widget.Toast;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
@@ -42,14 +37,10 @@ public class cuarta_activity extends AppCompatActivity {
     final int handlerState = 0;
     private ConnectedThread MyConexionBT;
 
-    DatabaseReference mRootReference;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cuarta_activity);
-
-        mRootReference = FirebaseDatabase.getInstance().getReference();
 
         bluetoothIn = new Handler() {
             public void handleMessage(android.os.Message msg) {
@@ -57,8 +48,6 @@ public class cuarta_activity extends AppCompatActivity {
                     String coordenada = (String) msg.obj;
                     String lugar = (String)tv_cambia.getText();
                     tv_cambia.setText(lugar+"-"+coordenada);
-
-                    subirDatos(lugar,coordenada);
                 }
             }
         };
@@ -150,14 +139,6 @@ public class cuarta_activity extends AppCompatActivity {
     public void Siguiente(View view){
         Intent Siguiente = new Intent(this, quinta_activity.class);
         startActivity(Siguiente);
-    }
-    private void subirDatos(String lugar, String coordenada){
-
-        Map<String, Object> datosCoor = new HashMap<>();
-        datosCoor.put("coordenada", coordenada);
-
-        mRootReference.child("coordenadas").child(lugar).setValue(datosCoor);
-
     }
 
     private BluetoothSocket createBluetoothSocket (BluetoothDevice device) throws IOException{
