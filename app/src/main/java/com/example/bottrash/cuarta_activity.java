@@ -15,6 +15,8 @@ import android.bluetooth.BluetoothSocket;
 import android.os.Handler;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -39,6 +41,7 @@ public class cuarta_activity extends AppCompatActivity {
     final int handlerState = 0;
     private ConnectedThread MyConexionBT;
 
+    DatabaseReference mRootReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
