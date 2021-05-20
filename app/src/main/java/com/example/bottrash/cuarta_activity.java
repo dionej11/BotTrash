@@ -18,6 +18,8 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
@@ -141,7 +143,14 @@ public class cuarta_activity extends AppCompatActivity {
         Intent Siguiente = new Intent(this, quinta_activity.class);
         startActivity(Siguiente);
     }
+    private void subirDatos(String lugar, String coordenada){
 
+        Map<String, Object> datosCoor = new HashMap<>();
+        datosCoor.put("coordenada", coordenada);
+
+        mRootReference.child("coordenadas").child(lugar).setValue(datosCoor);
+
+    }
     private BluetoothSocket createBluetoothSocket (BluetoothDevice device) throws IOException{
         return device.createRfcommSocketToServiceRecord(BTMODULEUUID);
     }
