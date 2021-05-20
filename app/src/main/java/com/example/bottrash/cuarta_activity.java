@@ -48,6 +48,7 @@ public class cuarta_activity extends AppCompatActivity {
                     String coordenada = (String) msg.obj;
                     String lugar = (String)tv_cambia.getText();
                     tv_cambia.setText(lugar+"-"+coordenada);
+                    subirDatos(lugar,coordenada);
                 }
             }
         };
