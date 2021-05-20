@@ -39,6 +39,7 @@ public class cuarta_activity extends AppCompatActivity {
     final int handlerState = 0;
     private ConnectedThread MyConexionBT;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
