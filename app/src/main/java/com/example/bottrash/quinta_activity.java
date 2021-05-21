@@ -13,8 +13,5 @@ public class quinta_activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quinta_activity);
     }
-    public void Siguiente(View view){
-        Intent Siguiente = new Intent(this, Sexta_activity.class);
-        startActivity(Siguiente);
-    }
+
 }
