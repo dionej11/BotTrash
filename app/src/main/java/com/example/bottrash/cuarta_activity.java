@@ -15,7 +15,6 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.os.Handler;
 import android.widget.Toast;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -63,6 +62,7 @@ public class cuarta_activity extends AppCompatActivity {
         btAdapter = BluetoothAdapter.getDefaultAdapter();
         VerificarEstadoBT();
         /*******Hilo donde se manejan los datos que entran via Bluetooth********/
+
         bluetoothIn = new Handler() {
             public void handleMessage(android.os.Message msg) {
                 if (msg.what == handlerState) {
