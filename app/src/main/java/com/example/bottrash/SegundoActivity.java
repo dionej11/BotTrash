@@ -12,6 +12,10 @@ public class SegundoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_segundo);
+
+        //hacer metodo para verificar si hay datos en la base de datos
+        //si hay, oculatar el txt y mover el boton de add para pintar la info
+        //si no hay dejarlos donde estan
     }
 
     //metodo para el btn de volver
