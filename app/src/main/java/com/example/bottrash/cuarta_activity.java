@@ -49,15 +49,12 @@ public class cuarta_activity extends AppCompatActivity {
     Handler bluetoothIn;
     final int handlerState = 0;
     private ConnectedThread MyConexionBT;
-    /**************************Declaración del objeto request para la BD***************************/
-    private RequestQueue queue; //es una cola donde se ponen todos los request que se hagan
     /**********************************Ciclo de vida onCreate**************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cuarta_activity);
-        /*******Inicialización del obj request de la libreria Volley********/
-        queue = Volley.newRequestQueue(this);
+
         /*******Inicialización del adaptador BT********/
         btAdapter = BluetoothAdapter.getDefaultAdapter();
         VerificarEstadoBT();
@@ -69,8 +66,8 @@ public class cuarta_activity extends AppCompatActivity {
                     String coordenada = (String) msg.obj;
                     String lugar = (String)tv_cambia.getText();
                     tv_cambia.setText(lugar+"-"+coordenada);
-                    obtenerDatosVolley();
-                    //subirDatos(lugar,coordenada);
+                    //obtenerDatosVolley();
+                    subirDatosVolley(lugar,coordenada);
                 }
             }
         };
@@ -155,39 +152,6 @@ public class cuarta_activity extends AppCompatActivity {
     public void Siguiente(View view){
         Intent Siguiente = new Intent(this, quinta_activity.class);
         startActivity(Siguiente);
-    }
-    /****************************Petición GET para la base de datos********************************/
-    private void obtenerDatosVolley(){
-        String url ="https://prueba-2912f-default-rtdb.firebaseio.com/Coordenadas.json";//API
-        /*************Objeto Json para hacer el request y obtener los datos************************/
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
-            new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject response) {//la respuesta del get es un objeto Json
-                    System.out.println(response);
-                    Iterator<String> iter = response.keys();//Iterador de strings para conocer las keys
-                    while (iter.hasNext()) {
-                        String key = iter.next();//Key del objeto
-                        try {
-                            System.out.println(key);//key/ lugar
-                            JSONObject obj = response.getJSONObject(key).getJSONObject("valor");//objeto de la key enviada
-                            String valor = obj.toString();
-
-                            System.out.println(valor);
-
-                        } catch (JSONException e) {
-                            System.out.println(e);
-                        }
-                    }
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    System.out.println(error);
-                }
-            }
-        );
-        queue.add(request);//Añadirle a la cola la petición
     }
     /****************************Petición PUT para la base de datos********************************/
     private void subirDatosVolley(String lugar, String coor){
