@@ -170,8 +170,8 @@ public class cuarta_activity extends AppCompatActivity {
                         String key = iter.next();//Key del objeto
                         try {
                             System.out.println(key);//key/ lugar
-                            JSONObject obj = response.getJSONObject(key);//objeto de la key enviada
-                            String valor = obj.getJSONObject("valor").toString();
+                            JSONObject obj = response.getJSONObject(key).getJSONObject("valor");//objeto de la key enviada
+                            String valor = obj.toString();
 
                             System.out.println(valor);
 
