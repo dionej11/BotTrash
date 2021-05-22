@@ -70,6 +70,7 @@ public class cuarta_activity extends AppCompatActivity {
                     tv_cambia.setText(lugar+"-"+coordenada);
                     //obtenerDatosVolley();
                     subirDatosVolley(lugar,coordenada);
+
                 }
             }
         };
@@ -106,8 +107,8 @@ public class cuarta_activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try{
-
                     btSocket.close();
+                    Siguiente(v);
                 } catch(Exception e){
                     e.printStackTrace();
                 }
@@ -152,7 +153,8 @@ public class cuarta_activity extends AppCompatActivity {
     }
     /*****************************Función para pasar a una activity********************************/
     public void Siguiente(View view){
-        Intent Siguiente = new Intent(this, quinta_activity.class);
+        Intent Siguiente = new Intent(this, SegundoActivity.class);
+        Siguiente.putExtra("valor",true);
         startActivity(Siguiente);
     }
     /****************************Petición PUT para la base de datos********************************/
