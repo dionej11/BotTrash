@@ -12,5 +12,5 @@
     <string name="conect">Conectar Bluetooth</string>
     <string name="desco">Desconectar</string>
     <string name="limpia">Limpiando...</string>
-    <string name="lugares">Lugares añadidos</string>
+    <string name="lugares">| Lugares añadidos</string>
 </resources>
