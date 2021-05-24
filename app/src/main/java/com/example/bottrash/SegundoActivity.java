@@ -60,63 +60,35 @@ public class SegundoActivity extends AppCompatActivity {
         /*******Inicialización del obj request de la libreria Volley********/
         queue = Volley.newRequestQueue(this);
 
-
         try {
             verificar(valor);
         } catch (AuthFailureError authFailureError) {
             authFailureError.printStackTrace();
         }
-
         //si hay, oculatar el txt y mover el boton de add para pintar la info
         //si no hay dejarlos donde estan
     }
 
     private void verificar(boolean valor) throws AuthFailureError {
-        if (valor) {
-            txt_visi.setVisibility(View.GONE);
-            btn_visi.setVisibility(View.GONE);
-            circulo.setVisibility(View.GONE);
-            txt_in.setVisibility(View.VISIBLE);
-            btn_in.setVisibility(View.VISIBLE);
+               if (valor) {
+                    txt_visi.setVisibility(View.GONE);
+                    btn_visi.setVisibility(View.GONE);
+                    circulo.setVisibility(View.GONE);
+                    txt_in.setVisibility(View.VISIBLE);
+                    btn_in.setVisibility(View.VISIBLE);
 
-            obtenerDatosVolley();
-            /*obtenerDatosVolley(new DatosResponseListener() {
-                @Override
-                public void datosResponse(ArrayList<String> datos) {
-                    System.out.println("El tamaño del array es "+datos.size());
-                    array.addAll(datos);
-                    for (int i=0;i<array.size();i++){
-                        System.out.println("dato: "+array.get(i));
-                    }
-                }
-            });*/
-            System.out.println("---------------");
-            System.out.println("El tamaño del array es ..."+array.size());
-            for (int i=0;i<array.size();i++){
-                System.out.println(array.get(i));
-            }
-            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
-                    this,
-                    android.R.layout.simple_list_item_1,
-                    array
-            );
-            lista.setAdapter(arrayAdapter);
-
-        }else{
-            System.out.println("sin datos");
-        }
-
+                    obtenerDatosVolley();
+               }else{
+                System.out.println("sin datos");
+              }
     }
 
     //metodo para el btn de volver
-
     public void siguiente(View view){
         Intent siguiente = new Intent(this, TercerActivity.class);
         startActivity(siguiente);
     }
-    /*public interface DatosResponseListener {
-        void datosResponse(ArrayList<String> datos);
-    }*/
+
     /****************************Petición GET para la base de datos********************************/
     private void obtenerDatosVolley() {
         String url ="https://prueba-2912f-default-rtdb.firebaseio.com/Coordenadas.json";//API
@@ -133,13 +105,13 @@ public class SegundoActivity extends AppCompatActivity {
                             String key = iter.next();
                             try {
                                 System.out.println(key);
-                                ruta += key+": ";
+                                ruta += key +":";
                                 JSONObject obj = response.getJSONObject(key);
                                 String valor = obj.getString("valor");
                                 System.out.println(valor);
                                 ruta += valor;
-
                                 System.out.println("La ruta es: "+ruta);
+
                                 array.add(ruta);
 
                             } catch (JSONException e) {
@@ -147,7 +119,6 @@ public class SegundoActivity extends AppCompatActivity {
                                 System.out.println(e);
                             }
                         }
-                        txt_in.setText("tamaño araray: "+array.size());
                         lista.setVisibility(View.VISIBLE);
                         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
                                 SegundoActivity.this,
@@ -155,7 +126,6 @@ public class SegundoActivity extends AppCompatActivity {
                                 array
                         );
                         lista.setAdapter(arrayAdapter);
-                        //listener.datosResponse(array);
                     }
                 }, new Response.ErrorListener() {
             @Override
