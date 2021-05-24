@@ -154,7 +154,6 @@ public class cuarta_activity extends AppCompatActivity {
     /*****************************Función para pasar a una activity********************************/
     public void Siguiente(View view){
         Intent Siguiente = new Intent(this, SegundoActivity.class);
-        Siguiente.putExtra("valor",true);
         startActivity(Siguiente);
     }
     /****************************Petición PUT para la base de datos********************************/

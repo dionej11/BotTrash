@@ -47,8 +47,6 @@ public class SegundoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_segundo);
 
-        boolean valor = getIntent().getBooleanExtra("valor",false);
-
         txt_visi = (TextView)findViewById(R.id.textView);
         btn_visi = (ImageButton)findViewById(R.id.imageButton);
         circulo = (ImageView)findViewById(R.id.imageView4);
@@ -60,27 +58,7 @@ public class SegundoActivity extends AppCompatActivity {
         /*******Inicialización del obj request de la libreria Volley********/
         queue = Volley.newRequestQueue(this);
 
-        try {
-            verificar(valor);
-        } catch (AuthFailureError authFailureError) {
-            authFailureError.printStackTrace();
-        }
-        //si hay, oculatar el txt y mover el boton de add para pintar la info
-        //si no hay dejarlos donde estan
-    }
-
-    private void verificar(boolean valor) throws AuthFailureError {
-               if (valor) {
-                    txt_visi.setVisibility(View.GONE);
-                    btn_visi.setVisibility(View.GONE);
-                    circulo.setVisibility(View.GONE);
-                    txt_in.setVisibility(View.VISIBLE);
-                    btn_in.setVisibility(View.VISIBLE);
-
-                    obtenerDatosVolley();
-               }else{
-                System.out.println("sin datos");
-              }
+        obtenerDatosVolley();
     }
 
     //metodo para el btn de volver
@@ -119,13 +97,26 @@ public class SegundoActivity extends AppCompatActivity {
                                 System.out.println(e);
                             }
                         }
-                        lista.setVisibility(View.VISIBLE);
-                        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
-                                SegundoActivity.this,
-                                android.R.layout.simple_list_item_1,
-                                array
-                        );
-                        lista.setAdapter(arrayAdapter);
+                        if (array.size() > 0) {
+                            txt_visi.setVisibility(View.INVISIBLE);
+                            btn_visi.setVisibility(View.INVISIBLE);
+                            circulo.setVisibility(View.INVISIBLE);
+
+                            txt_in.setVisibility(View.VISIBLE);
+                            btn_in.setVisibility(View.VISIBLE);
+                            lista.setVisibility(View.VISIBLE);
+                            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+                                    SegundoActivity.this,
+                                    android.R.layout.simple_list_item_1,
+                                    array
+                            );
+                            lista.setAdapter(arrayAdapter);
+                        }else {
+                            txt_visi.setVisibility(View.VISIBLE);
+                            btn_visi.setVisibility(View.VISIBLE);
+                            circulo.setVisibility(View.VISIBLE);
+                        }
+
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -134,6 +125,6 @@ public class SegundoActivity extends AppCompatActivity {
             }
         }
         );
-        queue.add(request);//Añadirle a la cola la petición
+        queue.add(request);//Añadirle a la cola la petición}
     }
 }
