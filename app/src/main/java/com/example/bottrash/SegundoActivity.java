@@ -70,11 +70,16 @@ public class SegundoActivity extends AppCompatActivity {
 
             obtenerDatosVolley();
 
+            for (int i=0; i<array.size(); i++){
+                System.out.println(array.get(i));
+            }
             ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
-                    this,
+                    SegundoActivity.this,
                     android.R.layout.simple_list_item_1,
                     array
             );
+
+
             lista.setAdapter(arrayAdapter);
 
         }else{
@@ -103,10 +108,15 @@ public class SegundoActivity extends AppCompatActivity {
                         while (iter.hasNext()) {
                             String key = iter.next();
                             try {
+                                String ruta = "";
                                 System.out.println(key);
+                                ruta += key +":";
                                 JSONObject obj = response.getJSONObject(key);
                                 String valor = obj.getString("valor");
                                 System.out.println(valor);
+                                ruta += valor;
+                                System.out.println(ruta);
+                                array.add(ruta);
 
                             } catch (JSONException e) {
                                 // Something went wrong!
