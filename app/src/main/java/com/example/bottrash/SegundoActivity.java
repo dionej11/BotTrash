@@ -148,6 +148,7 @@ public class SegundoActivity extends AppCompatActivity {
                             }
                         }
                         txt_in.setText("tamaño araray: "+array.size());
+                        lista.setVisibility(View.VISIBLE);
                         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
                                 SegundoActivity.this,
                                 android.R.layout.simple_list_item_1,
