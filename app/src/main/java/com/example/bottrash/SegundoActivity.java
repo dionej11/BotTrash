@@ -122,9 +122,15 @@ public class SegundoActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 System.out.println(error);
+                System.out.println("sin datos");
             }
         }
         );
-        queue.add(request);//Añadirle a la cola la petición}
+        if (btn_visi.getVisibility() == View.INVISIBLE) {
+            txt_visi.setVisibility(View.VISIBLE);
+            btn_visi.setVisibility(View.VISIBLE);
+            circulo.setVisibility(View.VISIBLE);
+        }
+        queue.add(request);//Añadirle a la cola la petición
     }
 }
