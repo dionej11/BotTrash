@@ -12,7 +12,7 @@
         android:layout_width="58dp"
         android:layout_height="59dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginBottom="20dp"
         android:background="#00FFFFFF"
         android:contentDescription="@string/descri"
         android:onClick="siguiente"
@@ -66,7 +66,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="44dp"
         android:text="@string/lugares"
         android:textSize="24sp"
         android:visibility="invisible"
@@ -75,11 +75,11 @@
 
     <ListView
         android:id="@+id/lista"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="112dp"
-        android:visibility="invisible"
+        android:layout_width="410dp"
+        android:layout_height="400dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageButton2"
         app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:layout_constraintVertical_bias="0.862"
         tools:layout_editor_absoluteX="0dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
