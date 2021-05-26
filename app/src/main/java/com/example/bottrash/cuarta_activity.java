@@ -101,7 +101,7 @@ public class cuarta_activity extends AppCompatActivity {
             public void onClick(View v) {
                 activar = true;
                 Toast.makeText(getBaseContext(), "Conectados", Toast.LENGTH_LONG).show();
-                MyConexionBT.write("c");
+                MyConexionBT.write("g");
             }
         });
         btnDesconexion.setOnClickListener(new View.OnClickListener() {//DESCONECTAR BT
