@@ -6,11 +6,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -111,12 +113,7 @@ public class SegundoActivity extends AppCompatActivity {
                                     array
                             );
                             lista.setAdapter(arrayAdapter);
-                        }else {
-                            txt_visi.setVisibility(View.VISIBLE);
-                            btn_visi.setVisibility(View.VISIBLE);
-                            circulo.setVisibility(View.VISIBLE);
                         }
-
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -132,5 +129,11 @@ public class SegundoActivity extends AppCompatActivity {
             circulo.setVisibility(View.VISIBLE);
         }
         queue.add(request);//Añadirle a la cola la petición
+        lista.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView adapterView, View view, int position, long id) {
+                System.out.println("se pulsó: "+position);
+            }
+        });
     }
 }
