@@ -129,11 +129,5 @@ public class SegundoActivity extends AppCompatActivity {
             circulo.setVisibility(View.VISIBLE);
         }
         queue.add(request);//Añadirle a la cola la petición
-        lista.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-            @Override
-            public void onItemClick(AdapterView adapterView, View view, int position, long id) {
-                System.out.println("se pulsó: "+position);
-            }
-        });
     }
 }
