@@ -13,4 +13,5 @@
     <string name="desco">Desconectar</string>
     <string name="limpia">Limpiando...</string>
     <string name="lugares">| Lugares añadidos</string>
+    <string name="limpio">Limpieza finalizada</string>
 </resources>
