@@ -69,7 +69,7 @@ public class quinta_activity extends AppCompatActivity {
     }
     public void onResume() {
         super.onResume();
-        if (activar) {
+        if ( activar ) {
             BluetoothDevice device = btAdapter.getRemoteDevice(address);
             try {
                 btSocket = createBluetoothSocket(device);
@@ -142,10 +142,11 @@ public class quinta_activity extends AppCompatActivity {
     public void Siguiente(View view){
         try{
             btSocket.close();
+            Intent Siguiente = new Intent(this, SegundoActivity.class);
+            startActivity(Siguiente);
         } catch(Exception e){
             e.printStackTrace();
         }
-        Intent Siguiente = new Intent(this, SegundoActivity.class);
-        startActivity(Siguiente);
+
     }
 }
