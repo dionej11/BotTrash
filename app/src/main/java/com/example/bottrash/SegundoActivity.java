@@ -145,10 +145,10 @@ public class SegundoActivity extends AppCompatActivity {
             public void onItemClick(AdapterView adapterView, View view, int position, long id) {
                 System.out.println("se pulsó: "+position);
                 String contenido = lista.getItemAtPosition(position).toString();
-                String recorrido =contenido.split(":")[1];
-                System.out.println(recorrido);
+                String lugar =contenido.split(":")[0];
+                System.out.println(lugar);
                 Intent siguiente = new Intent(SegundoActivity.this, quinta_activity.class);
-                siguiente.putExtra("recorrido", recorrido);
+                siguiente.putExtra("recorrido", lugar);
                 startActivity(siguiente);
             }
         });

@@ -89,8 +89,8 @@ public class quinta_activity extends AppCompatActivity {
             MyConexionBT = new quinta_activity.ConnectedThread(btSocket);//Se hace el proceso del conexiony envio de datos en el hilo
             MyConexionBT.start();
             MyConexionBT.write("h");
-            MyConexionBT.write(Dato+".");
-            System.out.println("envio coordenda");
+            MyConexionBT.write(".");
+            System.out.println("envio coordenada");
         }
     }
     /****************************Función del uso del hilo********************************/
